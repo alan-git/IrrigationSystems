@@ -11,12 +11,13 @@
 // 时基时钟初始化
 /* ******************************************************************************************* */
 // 利用STC-ISP软件导出此函数：
-static void Timer0Init(void)		//2毫秒@24.000MHz
+static void Timer0Init(void)		//5毫秒@12.000MHz
 {
-	AUXR |= 0x80;		//定时器时钟1T模式
+	AUXR &= 0x7F;		//定时器时钟12T模式
 	TMOD &= 0xF0;		//设置定时器模式
-	TL0 = 0x80;		//设置定时初值
-	TH0 = 0x44;		//设置定时初值
+	TMOD |= 0x01;		//设置定时器模式
+	TL0 = 0x78;		//设置定时初值
+	TH0 = 0xEC;		//设置定时初值
 	TF0 = 0;		//清除TF0标志
 	TR0 = 1;		//定时器0开始计时
 }
@@ -47,11 +48,13 @@ void InitInterrupt()
 void Timer_TimeBase_Isr () interrupt 1 using 1
 {
 	static u16 cp;
+	TL0 = 0x78;
+	TH0 = 0xEC;
 	if (++ cp > OVERFLOW_TIMES)
 	{
 		cp = 0;
 		// 以OVERFLOW_TIMES为时基：
-
+		Timer_Clock();	// 时间时钟计时函数；
 	}
 	// 以定时器溢出时长为时基：
 

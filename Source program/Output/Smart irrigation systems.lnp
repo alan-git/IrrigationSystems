@@ -1,0 +1,5 @@
+"..\Output\MAIN.obj",
+"..\Output\PBDATA.obj",
+"..\Output\TIME_BASE.obj" 
+TO "..\Output\Smart irrigation systems" 
+PRINT("..\Listing\Smart irrigation systems.m51") RAMSIZE(256) 

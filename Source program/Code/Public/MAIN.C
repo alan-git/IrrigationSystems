@@ -11,7 +11,13 @@ void main()
 {
 	// IO电平初始化：
 	InitIO();
-	// 时基定时器初始化并开启中断总开关：
+    // 初始化LCD1602：
+	LCD1602_Init(); 
+	// 时间时钟初始化：
+	Timer_Clock_Init();
+	// 设定PCF8591读取端口：
+	PCF8591_Con_Init(CON3);
+    // 时基定时器初始化并开启中断总开关：
 	InitInterrupt();
 	// 初始化完成提示：
 	InitOver();
@@ -22,6 +28,6 @@ void main()
 		STC_ISP();
 	
 		//
-
+		Read_PCF8591();
 	}
 }

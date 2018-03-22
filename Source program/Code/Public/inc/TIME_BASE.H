@@ -7,7 +7,7 @@
 /* 1.利用STC-ISP软件导出函数 Timer0Init/Timer1Init/...；
 /* 2.#define T_0/T_1/...;
 /* 3.修改定时器0/1/...溢出时长；
-/* 4.选取一个基准时间(TIME_BASE)；
+/* 4.选取一个基准时间(TIME_BASE，尽量为溢出时长的整数倍)；
 /* N.OVER；
 /* ******************************************************************************************* */
 #define T_0
@@ -15,7 +15,7 @@
 //#define T_2
 
 #ifdef T_0
-	#define SET_T0_TIME				(2000L)			//定时器0溢出时长；
+	#define SET_T0_TIME				(5000L)			//定时器0溢出时长；
 	#define TIMING_DELAY_USE_TIMER	SET_T0_TIME
 #else
 	#ifdef T_1
@@ -30,7 +30,7 @@
 #endif
 
 //#define _16MS		(16000L)	  					//自定义基准时长(溢出时长的整数倍)；
-#define TIME_BASE	_20MS							//基准时间定义；
+#define TIME_BASE	_500MS							//基准时间定义；
 
 #define OVERFLOW_TIMES (TIME_BASE/TIMING_DELAY_USE_TIMER)//计满所选基准时间，定时器的溢出次数；
 #define _60S		(60000000L)

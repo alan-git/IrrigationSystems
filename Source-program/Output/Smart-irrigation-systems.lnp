@@ -1,0 +1,13 @@
+"..\Output\MAIN.obj",
+"..\Output\PBDATA.obj",
+"..\Output\TIME_BASE.obj",
+"..\Output\I2C.obj",
+"..\Output\PCF8591.obj",
+"..\Output\LCD1602.obj",
+"..\Output\Timer_Clock.obj",
+"..\Output\SeparateDis.obj",
+"..\Output\Unknown_Category.obj",
+"..\Output\SysSelf-test_And_SysInit.obj",
+"..\Output\Key_WorkMode_DisControl.obj" 
+TO "..\Output\Smart-irrigation-systems" 
+PRINT("..\Listing\Smart-irrigation-systems.m51") RAMSIZE(256) 

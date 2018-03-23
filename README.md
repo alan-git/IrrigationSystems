@@ -1,33 +1,41 @@
-# æ™ºèƒ½çŒæº‰ç³»ç»Ÿ
+## ÖÇÄÜ¹à¸ÈÏµÍ³
+##### ¿ª·¢»·¾³£º
+    Source program£º*Keil uVision4 V9.02*
+    Simulation£º*Proteus 8 Professional V8.6 SP2*
+    *Microsoft Visio 2016 MSO*
 
-##### å¼€å‘çŽ¯å¢ƒï¼š
+### ÎÄ¼þÁ´½Ó
+---
 
-> Source programï¼š* Keil uVision4 V9.02 *
->
-> Simulationï¼š* Proteus 8 Professional V8.6 SP2 *
->
-> Microsoft Visio 2016 MSO
+- ÐèÒªÁË½â¹¤³ÌÄ£°åµÄÊ¹ÓÃ»ò¹¤³ÌÎÄ¼þ¸÷×ÔµÄ¹¦ÄÜ¶¨Òå£¬Çë²ÎÔÄ[¹¤³ÌÄ£°åÊ¹ÓÃËµÃ÷](./Source-program/Documents/¹¤³ÌÄ£°åÊ¹ÓÃËµÃ÷.md)
+- ÁË½âÎÄ¼þ±äÁ¿º¯ÊýµÈµÄÃüÃû·½Ê½[ÃüÃû·½Ê½](./Source-program/Documents/ÃüÃû·½Ê½.md)
+- ²é¿´°æ±¾¸üÐÂ¼ÇÂ¼[°æ±¾ÀúÊ·](./Source-program/Documents/°æ±¾ÀúÊ·.md)
 
-#####åŸºæœ¬åŠŸèƒ½ä»‹ç»ï¼š
+### ¹¦ÄÜ¸ÅÊö
+---
 
-##### ç‰¹è‰²åŠŸèƒ½ï¼š
+#### »ù±¾¹¦ÄÜ½éÉÜ£º
 
-* è½¯ä»¶å¤ä½ã€‚åœ¨REG51.Hçš„åŸºç¡€ä¸Šï¼Œsfrå®šä¹‰äº†STC89C5xRCç³»åˆ—ç‰¹æœ‰çš„ç‰¹æ®ŠåŠŸèƒ½å¯„å­˜å™¨ISP_CONTRï¼Œæ£€æµ‹åˆ°ä¸‹è½½ä¿¡å·èŠ¯ç‰‡è‡ªåŠ¨é‡å¯ï¼Œé¿å…äº†è°ƒè¯•è¿‡ç¨‹ä¸­éœ€è¦ä¸æ–­å†·å¯åŠ¨çš„ä¸ä¾¿ã€‚
+#### ÌØÉ«¹¦ÄÜ£º
+###### 1.Èí¼þ¸´Î»£º
+ÔÚREG51.HµÄ»ù´¡ÉÏ£¬¶¨ÒåSTC89C5xRCÏµÁÐÌØÓÐµÄÌØÊâ¹¦ÄÜ¼Ä´æÆ÷ISP_CONTR£¬¼ì²âµ½ÏÂÔØÐÅºÅÐ¾Æ¬×Ô¶¯ÖØÆô£¬±ÜÃâÁËµ÷ÊÔ¹ý³ÌÖÐÐèÒª²»¶ÏÀäÆô¶¯µÄ²»±ã¡£  
+![Èí¼þ¸´Î»µÄÊµÏÖ](.\Pic\Èí¼þ¸´Î»µÄÊµÏÖ.PNG)   
+###### ´úÂë¶Î£º
+    >    / ********************************
+    >    // ÏÂÔØ¼ì²â
+    >    / ******************************* /
+    >    sfr ISP_CONTR = 0xE7;
+    >    // ISPÇø¸´Î»£º
+    >    void STC_ISP()
+    >    {
+    >        P30 = 1;
+    >        DelayUS(1);    // µÈ´ýµçÆ½ÎÈ¶¨£»
+    >        if (!P30)
+    >            ISP_CONTR = 0x60;
+    >    }
+###### 2.ÏµÍ³×Ô²âÓë½ø¶ÈÌõ£º
+ÔÚ³ÌÐòÉÏµç³õÊ¼»¯Ç°¼ÓÈëÏµÍ³×Ô²â£¬±ãÓÚ¼°Ê±·¢ÏÖµçÂ·Òì³££»¼ÓÈë½ø¶ÈÏÔÊ¾£¬±ãÓÚ×·×Ù³ÌÐòÔËÐÐÎ»ÖÃ£¬¼õÉÙµ÷ÊÔÄÑ¶È¡£  
+###### 3.×éºÏ°´¼ü¼ì²â£º
+£¨×éºÏ°´¼ü²»Ó°ÏìÆÕÍ¨°´¼ü¼ì²â£¬Ñ¡ÓÃ£©
 
-  > STC89C52RCæ•°æ®æ‰‹å†Œï¼š![è½¯ä»¶å¤ä½çš„å®žçŽ°](.\Pic\è½¯ä»¶å¤ä½çš„å®žçŽ°.PNG)   
-
-  */* ********************************************************************************************
-  *// ä¸‹è½½æ£€æµ‹*
-  */* ******************************************************************************************* */*
-  *sfr ISP_CONTR = 0xE7;*
-  *// ISPåŒºå¤ä½ï¼š*
-  *void STC_ISP()*
-  *{*
-  	P30 = 1;
-  	DelayUS(1);	 	// ç­‰å¾…ç”µå¹³ç¨³å®šï¼›
-  	if (!P30)
-  		ISP_CONTR = 0x60;
-  *}*
-
-##### æ›´æ–°æ—¥å¿—ï¼š
 

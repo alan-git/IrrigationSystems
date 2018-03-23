@@ -1,0 +1,162 @@
+C51 COMPILER V9.02   SEPARATEDIS                                                           03/23/2018 23:24:39 PAGE 1   
+
+
+C51 COMPILER V9.02, COMPILATION OF MODULE SEPARATEDIS
+OBJECT MODULE PLACED IN ..\Output\SeparateDis.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\Code\DeveloperCode\SeparateDis.C BROWSE INCDIR(..\Code\DeveloperCode\inc
+                    -;..\Code\DirverCode\inc;..\Code\Public\inc) DEBUG OBJECTEXTEND PRINT(..\Listing\SeparateDis.lst) OBJECT(..\Output\Separa
+                    -teDis.obj)
+
+line level    source
+
+   1          
+   2          #include "SeparateDis.H"
+   3          
+   4          /* *******************************************************************************************
+   5          // 显示系统自检：
+   6          /* ******************************************************************************************* */
+   7          void Dis_SysSelftest()
+   8          {
+   9   1          LCD1602_Clear();
+  10   1          LCD1602_DisString("System Self-test:");   
+  11   1          LCD1602_GoTo_yx(2,0);
+  12   1      }
+  13          
+  14          /* *******************************************************************************************
+  15          // 显示加载进度条：
+  16          // Input：读取到的AD值，Day/Night选择；
+  17          /* ******************************************************************************************* */
+  18          void Dis_Its_Daytime_Not_Night(u8 temp_ad, bit sw)
+  19          {
+  20   1          LCD1602_Clear();
+  21   1          if (sw == TRUE)
+  22   1          {
+  23   2              LCD1602_DisString("It's Daytime,"); 
+  24   2          }
+  25   1          else
+  26   1          {
+  27   2              LCD1602_DisString("It's Night,");  
+  28   2          }
+  29   1      #ifdef DeveloperMode
+  30   1          LCD1602_GoTo_yx(2,0);
+  31   1          LCD1602_DisNum(temp_ad/100); 
+  32   1          LCD1602_DisNum(temp_ad); 
+  33   1      #else
+                  temp_ad ++;       //防止出现定义了参数却未使用的警告；
+                  temp_ad --;
+              #endif
+  37   1          LCD1602_GoTo_yx(2,9);
+  38   1          LCD1602_DisString("Right?"); 
+  39   1      }
+  40          
+  41          /* *******************************************************************************************
+  42          // 显示加载进度条：
+  43          // Input：要显示的黑块数量
+  44          /* ******************************************************************************************* */
+  45          void Dis_ProgressBar(u8 num)
+  46          {
+  47   1          u8 i;
+  48   1          for (i=0; i<num; i++)
+  49   1          {
+  50   2              WriteOneData(BLACK_BLOCK);
+  51   2              DelayMS(80);   
+  52   2          }
+  53   1      }
+C51 COMPILER V9.02   SEPARATEDIS                                                           03/23/2018 23:24:39 PAGE 2   
+
+  54          
+  55          /* *******************************************************************************************
+  56          // 显示初始化过程：
+  57          // Input：要显示的黑块数量
+  58          /* ******************************************************************************************* */
+  59          void Dis_init_()
+  60          {
+  61   1          LCD1602_Clear();
+  62   1          LCD1602_DisString("System Init:");   
+  63   1          LCD1602_GoTo_yx(2,0);
+  64   1      }
+  65          
+  66          /* *******************************************************************************************
+  67          // 自动或手动模式的显示内容：
+  68          /* ******************************************************************************************* */
+  69          void Dis_Auto_not_ManualMode(bit a_not_m)
+  70          {
+  71   1      //    u8 i;
+  72   1          LCD1602_Clear();
+  73   1          LCD1602_DisString("H:");   
+  74   1          LCD1602_DisNum(Humidity);
+  75   1          WriteOneData('%');   
+  76   1          if (a_not_m == TRUE)
+  77   1          {
+  78   2      //        for (i=0; i<(16-5-sizeof("Auto")); i++)
+  79   2      //        {
+  80   2      //            WriteOneData(' ');   
+  81   2      //        }
+  82   2      //        LCD1602_DisString("Auto");
+  83   2              LCD1602_DisString("       Auto");
+  84   2          }
+  85   1          else
+  86   1          {
+  87   2      //        for (i=0; i<(16-5-sizeof("Manual")); i++)
+  88   2      //        {
+  89   2      //            WriteOneData(' ');   
+  90   2      //        }
+  91   2      //        LCD1602_DisString("Manual");
+  92   2              LCD1602_DisString("     Manual");
+  93   2          }
+  94   1          LCD1602_GoTo_yx(2,0);
+  95   1          LCD1602_DisString("Time: ");
+  96   1          LCD1602_DisNum(Hour);   
+  97   1          WriteOneData(':');
+  98   1          LCD1602_DisNum(Min);   
+  99   1          WriteOneData(':');
+ 100   1          LCD1602_DisNum(Sec);   
+ 101   1      }
+ 102          /* *******************************************************************************************
+ 103          // 调节数据时的显示内容：
+ 104          // 参数1：宏定义，时，分，秒，或湿度阈值；
+ 105          // 参数2：当前值；
+ 106          /* ******************************************************************************************* */
+ 107          void AdjustmentDataDis(u8 choose, num_data)
+ 108          {
+ 109   1          LCD1602_Clear();
+ 110   1          LCD1602_DisString("Set:");
+ 111   1          switch (choose)
+ 112   1          {
+ 113   2              case HOUR:LCD1602_DisString("Hour = ");
+ 114   2                  break;
+ 115   2              case MIN: LCD1602_DisString("Min = ");
+C51 COMPILER V9.02   SEPARATEDIS                                                           03/23/2018 23:24:39 PAGE 3   
+
+ 116   2                  break;
+ 117   2              case SEC: LCD1602_DisString("Sec = ");
+ 118   2                  break;
+ 119   2              case HUMIDLIMIT:LCD1602_DisString("H_Limit = ");
+ 120   2                  break;
+ 121   2              default:
+ 122   2                  break;
+ 123   2          }
+ 124   1          LCD1602_DisNum(num_data);
+ 125   1          LCD1602_GoTo_yx(2,0);
+ 126   1          switch (choose)
+ 127   1          {
+ 128   2              case SEC: LCD1602_DisString("S1,S2: Set zero");
+ 129   2                  break;
+ 130   2              default: LCD1602_DisString("S1: Inc, S2: Dec");
+ 131   2                  break;
+ 132   2          }    
+ 133   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    312    ----
+   CONSTANT SIZE    =    169    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       2
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

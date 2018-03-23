@@ -1,0 +1,156 @@
+C51 COMPILER V9.02   SYSSELF_TEST_AND_SYSINIT                                              03/23/2018 23:24:40 PAGE 1   
+
+
+C51 COMPILER V9.02, COMPILATION OF MODULE SYSSELF_TEST_AND_SYSINIT
+OBJECT MODULE PLACED IN ..\Output\SysSelf-test_And_SysInit.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\Code\DeveloperCode\SysSelf-test_And_SysInit.C BROWSE INCDIR(..\Code\Deve
+                    -loperCode\inc;..\Code\DirverCode\inc;..\Code\Public\inc) DEBUG OBJECTEXTEND PRINT(..\Listing\SysSelf-test_And_SysInit.ls
+                    -t) OBJECT(..\Output\SysSelf-test_And_SysInit.obj)
+
+line level    source
+
+   1          /* *******************************************************************************************
+   2          // Author: biu~
+   3          // System self-test and initialization;系统自检与初始化；
+   4          /* ******************************************************************************************* */
+   5          
+   6          #include "SysSelf-test_And_SysInit.H"
+   7          
+   8          /* *******************************************************************************************
+   9          // 系统自检与初始化整合函数：
+  10          /* ******************************************************************************************* */
+  11          extern void sysSelftest();
+  12          extern void sysInit();
+  13          extern void initOver();
+  14          void SysSelftest_And_SysInit()
+  15          {
+  16   1          // 系统自检：
+  17   1          sysSelftest();
+  18   1          // 系统初始化：
+  19   1          sysInit();
+  20   1          // 初始化完成提示：
+  21   1          initOver();
+  22   1      }
+  23          /* *******************************************************************************************
+  24          // 系统自检：
+  25          /* ******************************************************************************************* */
+  26          static void sysSelftest()
+  27          {
+  28   1          u8 temp_ad;
+  29   1          // 初始化LCD1602：
+  30   1              LCD1602_Init(); 
+  31   1              // 设置PCF8591检测亮度：
+  32   1          PCF8591_Con_Init(CON0);
+  33   1          Read_PCF8591();                 //第一组值丢弃；
+  34   1      #ifndef DeveloperMode               //调试模式下不在执行，耗时较长；
+                  // 检测1602显示：
+                  Dis_SysSelftest();
+                  Dis_ProgressBar(2);
+                  // 系统状态提示灯常亮0.6S：
+                  SysLED_On();
+                  DelayMS(600);
+                  SysLED_Off();
+                  Dis_ProgressBar(4);
+                  // 继电器打开0.6S：
+                  Relay_On();
+                  DelayMS(600);
+                  Relay_Off();
+                  Dis_ProgressBar(4);
+                  // 蜂鸣器打开0.6S：
+                  Buzzer_On();
+                  DelayMS(600);
+                  Buzzer_Off();
+                  Dis_ProgressBar(4);
+              #endif
+C51 COMPILER V9.02   SYSSELF_TEST_AND_SYSINIT                                              03/23/2018 23:24:40 PAGE 2   
+
+  54   1          // 检测光线强度：
+  55   1          temp_ad = Read_PCF8591(); 
+  56   1          if (temp_ad > LIGHT_INTENSITY_THRESHOLD)
+  57   1          {
+  58   2              Dis_Its_Daytime_Not_Night(temp_ad, FALSE);
+  59   2      //        TestCode();
+  60   2          }
+  61   1          else
+  62   1          {
+  63   2              Dis_Its_Daytime_Not_Night(temp_ad, TRUE);
+  64   2          }
+  65   1      }
+  66          /* *******************************************************************************************
+  67          // 系统初始化
+  68          /* ******************************************************************************************* */
+  69          extern void initIO();
+  70          static void sysInit()
+  71          {
+  72   1          Dis_init_();
+  73   1          // IO电平初始化：
+  74   1          initIO();
+  75   1          Dis_ProgressBar(4);
+  76   1              // 时间时钟初始化：
+  77   1              Timer_Clock_Init();
+  78   1          Dis_ProgressBar(4);
+  79   1              // 设定PCF8591读取端口为传感器端：
+  80   1              PCF8591_Con_Init(CON3);
+  81   1          Read_PCF8591();                         //第一组值丢弃；
+  82   1          Dis_ProgressBar(4);
+  83   1          DelayMS(200);                           //阻塞感，让人有“正在加载”的感觉；
+  84   1          // 时基定时器初始化并开启中断总开关：
+  85   1          InitInterrupt();
+  86   1          Dis_ProgressBar(4);
+  87   1          initOver();
+  88   1      }
+  89          
+  90          /* *******************************************************************************************
+  91          // IO电平初始化
+  92          /* ******************************************************************************************* */
+  93          static void initIO()
+  94          {
+  95   1          P0 = 0xFF;
+  96   1          P1 = 0xFF;  
+  97   1          P2 = 0xFF;  
+  98   1          P3 = 0xFF;  
+  99   1      //    P4 = 0xFF;        
+ 100   1      //    P5 = 0xFF;        
+ 101   1      //    P6 = 0xFF;        
+ 102   1      //    P7 = 0xFF;        
+ 103   1      //    P0M0 = 0x00;      
+ 104   1      //    P0M1 = 0x00;      
+ 105   1      //    P1M0 = 0x00;      
+ 106   1      //    P1M1 = 0x00;      
+ 107   1      //    P2M0 = 0x00;      
+ 108   1      //    P2M1 = 0x00;      
+ 109   1      //    P3M0 = 0x00;      
+ 110   1      //    P3M1 = 0x00;      
+ 111   1      //    P4M0 = 0x00;      
+ 112   1      //    P4M1 = 0x00;      
+ 113   1      //    P5M0 = 0x00;      
+ 114   1      //    P5M1 = 0x00;      
+ 115   1      //    P6M0 = 0x00;      
+C51 COMPILER V9.02   SYSSELF_TEST_AND_SYSINIT                                              03/23/2018 23:24:40 PAGE 3   
+
+ 116   1      //    P6M1 = 0x00;      
+ 117   1      //    P7M0 = 0x00;      
+ 118   1      //    P7M1 = 0x00;      
+ 119   1      }
+ 120          
+ 121          /* *******************************************************************************************
+ 122          // 初始化完成提示
+ 123          /* ******************************************************************************************* */
+ 124          static void initOver()
+ 125          {
+ 126   1          SysLED_Flash(50, 2);
+ 127   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    116    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

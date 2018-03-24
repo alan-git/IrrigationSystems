@@ -155,7 +155,7 @@
         checkOrdinaryKey(); //普通按键检测，在checkCombKey()后调用；  
         keyCheckOver();     //按键检测完毕响应，在checkOrdinaryKey()后调用；  
     }    
-由于代码过多此处只引用一小段，具体按键代码在文件[Key_WorkMode_DisControl.C][按键文件位置]中查看，显示内容实现在文件[SeparateDis.C][显示文件位置]中查看；
+由于代码过多此处不再引用，具体按键代码在文件[Key_WorkMode_DisControl.C](https://github.com/alan-git/IrrigationSystems/blob/master/Source-program/Code/DeveloperCode/Key_WorkMode_DisControl.C)中查看，显示内容实现在文件[SeparateDis.C](https://github.com/alan-git/IrrigationSystems/blob/master/Source-program/Code/DeveloperCode/SeparateDis.C)中查看；
 
 #### 四、后续功能设想：
 
@@ -163,7 +163,7 @@
 不定时更新；
 
 ###### ~~1.时钟掉电记忆：~~
-可采用89C52自带的E2prom功能；  
+可采用*89C52*自带的*E2prom*功能；  
 目前状态：弃；  
 
 ###### ~~2.时间-湿度写入*E2prom*：~~
@@ -185,6 +185,6 @@ AD值向湿度转化需要结合实物进行处理，目前设想方案：
 1. 特殊曲线方程；
 1. 测试多组 “AD-湿度” ，利用二维数组进行预置；    
 
-[显示文件位置]:(https://github.com/alan-git/IrrigationSystems/blob/master/Source-program/Code/DeveloperCode/SeparateDis.C)
-[按键文件位置]:(https://github.com/alan-git/IrrigationSystems/blob/master/Source-program/Code/DeveloperCode/Key_WorkMode_DisControl.C)
+
+
 

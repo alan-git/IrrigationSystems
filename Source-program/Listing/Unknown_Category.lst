@@ -1,4 +1,4 @@
-C51 COMPILER V9.02   UNKNOWN_CATEGORY                                                      03/23/2018 23:24:40 PAGE 1   
+C51 COMPILER V9.02   UNKNOWN_CATEGORY                                                      03/24/2018 11:29:26 PAGE 1   
 
 
 C51 COMPILER V9.02, COMPILATION OF MODULE UNKNOWN_CATEGORY
@@ -52,19 +52,18 @@ line level    source
   41   1          else
   42   1          {
   43   2              min_accuracy = (H_MAX_to_AD - H_MIN_to_AD) / 100;
-  44   2      //        Humidity = min_accuracy * (H_MAX_to_AD - temp_ad);
-  45   2              Humidity = min_accuracy * (temp_ad - H_MIN_to_AD);      //根据实际情况选择计算公式；
-  46   2          }
-  47   1      }
+  44   2              Humidity = (H_MAX_to_AD - temp_ad) / min_accuracy;      //根据实际情况选择计算公式；
+  45   2          }
+  46   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     75    ----
+   CODE SIZE        =     80    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
-C51 COMPILER V9.02   UNKNOWN_CATEGORY                                                      03/23/2018 23:24:40 PAGE 2   
-
    PDATA SIZE       =   ----    ----
+C51 COMPILER V9.02   UNKNOWN_CATEGORY                                                      03/24/2018 11:29:26 PAGE 2   
+
    DATA SIZE        =      2       4
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----

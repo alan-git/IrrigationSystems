@@ -1,4 +1,4 @@
-C51 COMPILER V9.02   SYSSELF_TEST_AND_SYSINIT                                              03/23/2018 23:24:40 PAGE 1   
+C51 COMPILER V9.02   SYSSELF_TEST_AND_SYSINIT                                              03/24/2018 11:29:26 PAGE 1   
 
 
 C51 COMPILER V9.02, COMPILATION OF MODULE SYSSELF_TEST_AND_SYSINIT
@@ -62,7 +62,7 @@ line level    source
                   Buzzer_Off();
                   Dis_ProgressBar(4);
               #endif
-C51 COMPILER V9.02   SYSSELF_TEST_AND_SYSINIT                                              03/23/2018 23:24:40 PAGE 2   
+C51 COMPILER V9.02   SYSSELF_TEST_AND_SYSINIT                                              03/24/2018 11:29:26 PAGE 2   
 
   54   1          // 检测光线强度：
   55   1          temp_ad = Read_PCF8591(); 
@@ -126,7 +126,7 @@ line level    source
  113   1      //    P5M0 = 0x00;      
  114   1      //    P5M1 = 0x00;      
  115   1      //    P6M0 = 0x00;      
-C51 COMPILER V9.02   SYSSELF_TEST_AND_SYSINIT                                              03/23/2018 23:24:40 PAGE 3   
+C51 COMPILER V9.02   SYSSELF_TEST_AND_SYSINIT                                              03/24/2018 11:29:26 PAGE 3   
 
  116   1      //    P6M1 = 0x00;      
  117   1      //    P7M0 = 0x00;      

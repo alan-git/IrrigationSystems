@@ -41,7 +41,6 @@ void AD_to_Humidity()
     else
     {
         min_accuracy = (H_MAX_to_AD - H_MIN_to_AD) / 100;
-//        Humidity = min_accuracy * (H_MAX_to_AD - temp_ad);
-        Humidity = min_accuracy * (temp_ad - H_MIN_to_AD);      //根据实际情况选择计算公式；
+        Humidity = (H_MAX_to_AD - temp_ad) / min_accuracy;      //根据实际情况选择计算公式；
     }
 }

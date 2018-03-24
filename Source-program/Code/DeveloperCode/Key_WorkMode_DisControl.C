@@ -210,6 +210,7 @@ static void combS1_Work()
     if (sS2 && PIN_S2)  //S2按下过，并且目前处于抬起状态；
     {
         sS2 = 0;//修改后的复位位置；
+        TestCode();  
         switch (workMode)
         {
             case autoControl:                               //自动模式下，组合键无效；

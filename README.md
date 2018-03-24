@@ -39,18 +39,18 @@
 ![STC89-Datasheet：软件复位的实现](./Pic/软件复位的实现.PNG "STC89-Datasheet：软件复位的实现")   
 
 ###### 代码段：
->/ ********************************
->// 下载检测
->/ ******************************* /
->sfr ISP_CONTR = 0xE7;
->// ISP区复位：
->void STC_ISP()
->{
->    P30 = 1;
->    DelayUS(1);    // 等待电平稳定；
+>/ ********************************  
+>// 下载检测  
+>/ ******************************* /  
+>sfr ISP_CONTR = 0xE7;  
+>// ISP区复位：  
+>void STC_ISP()  
+>{  
+>    P30 = 1;  
+>    DelayUS(1);    // 等待电平稳定；  
 >    if (!P30)
->        ISP_CONTR = 0x60;
->}
+>        ISP_CONTR = 0x60;  
+>}  
 ###### 2.系统自测、进度条：
     - 在程序上电初始化前加入系统自检，便于及时发现电路异常；加入进度显示，便于追踪程序运行位置，减少调试难度。  
     - 其中，PCF8591自检为调用模块的光敏电阻，判断检测到的光强提示当前是白天还是晚上。  
@@ -59,73 +59,73 @@
 ![实物图片-实物图片-光照检测-夜晚](./Pic/实物图片-光照检测-夜晚.PNG "实物图片-光照检测-夜晚")
 ![实物图片-初始化](./Pic/实物图片-初始化.PNG "实物图片-初始化")
 
-###### 部分代码段：
->/ ********************************
->// 系统自检：
->/ ******************************** */
->static void sysSelftest()
+###### 部分代码段：                
+>/ ********************************  
+>// 系统自检：  
+>/ ******************************** */  
+>static void sysSelftest()  
 >{
->    u8 temp_ad;
->    // 初始化LCD1602：
->	LCD1602_Init(); 
->	// 设置PCF8591检测亮度：
->    PCF8591_Con_Init(CON0);
->    Read_PCF8591();                 //第一组值丢弃；
->#ifndef DeveloperMode               //调试模式下不再执行，耗时较长；
->//    TestCode();
->    // 检测1602显示：
->    Dis_SysSelftest();
->    Dis_ProgressBar(2);
->    // 系统状态提示灯常亮0.6S：
->    SysLED_On();
->    DelayMS(600);
->    SysLED_Off();
->    Dis_ProgressBar(4);
->    // 继电器打开0.6S：
->    Relay_On();
->    DelayMS(600);
->    Relay_Off();
->    Dis_ProgressBar(4);
->    // 蜂鸣器打开0.6S：
->    Buzzer_On();
->    DelayMS(600);
->   Buzzer_Off();
->    Dis_ProgressBar(4);
->#endif
->    // 检测光线强度：
->    temp_ad = Read_PCF8591(); 
->    if (temp_ad > LIGHT_INTENSITY_THRESHOLD)
+>    u8 temp_ad;  
+>    // 初始化LCD1602：  
+>	LCD1602_Init();   
+>	// 设置PCF8591检测亮度：  
+>    PCF8591_Con_Init(CON0);  
+>    Read_PCF8591();                 //第一组值丢弃；  
+>#ifndef DeveloperMode               //调试模式下不再执行，耗时较长；  
+>//    TestCode();  
+>    // 检测1602显示：  
+>    Dis_SysSelftest();  
+>    Dis_ProgressBar(2);  
+>    // 系统状态提示灯常亮0.6S：  
+>    SysLED_On();  
+>    DelayMS(600);  
+>    SysLED_Off();  
+>    Dis_ProgressBar(4);  
+>    // 继电器打开0.6S：  
+>    Relay_On();  
+>    DelayMS(600);  
+>    Relay_Off();  
+>    Dis_ProgressBar(4);  
+>    // 蜂鸣器打开0.6S：  
+>    Buzzer_On();  
+>    DelayMS(600);  
+>   Buzzer_Off();  
+>    Dis_ProgressBar(4);  
+>#endif  
+>    // 检测光线强度：  
+>    temp_ad = Read_PCF8591();   
+>    if (temp_ad > LIGHT_INTENSITY_THRESHOLD)  
 >    {
->        Dis_Its_Daytime_Not_Night(temp_ad, FALSE);
->//        TestCode();
->    }
->    else
->    {
->        Dis_Its_Daytime_Not_Night(temp_ad, TRUE);
->    }
->}
+>        Dis_Its_Daytime_Not_Night(temp_ad, FALSE);  
+>//        TestCode();  
+>    }  
+>    else  
+>    {  
+>        Dis_Its_Daytime_Not_Night(temp_ad, TRUE);  
+>    }  
+>}  
 
 ###### 3.开发者模式：
     - 可以注意到，上方代码段中有如下几行代码：
-    >#ifndef DeveloperMode               //调试模式下不在执行，耗时较长；
-    >//    TestCode();
-    >......
-    >#endif
+    > #ifndef DeveloperMode               //调试模式下不在执行，耗时较长；
+    > //    TestCode();
+    > ......
+    > #endif
     - 其中TestCode()所包含的代码段为测试代码，可方便在实物Debug的过程中测试做程序断点，观察此段代码是否被执行；而调试结束后，只需将DeveloperMode的定义屏蔽，即使忘记删除测试代码，也不会影响代码的正常执行；
 
 ###### TestCode()代码段：
->/ ********************************
+>/ ********************************  
 >// 测试代码  
->/ ******************************** */
->void TestCode()
->{
->#ifdef DeveloperMode
->    SysLED_On();
->    DelayMS(500);
->    SysLED_Off();
->#endif
->	_nop_();
->}
+>/ ******************************** */  
+>void TestCode()  
+>{  
+>#ifdef DeveloperMode  
+>    SysLED_On();  
+>    DelayMS(500);  
+>    SysLED_Off();  
+>#endif  
+>	_nop_();  
+>}  
 
 ###### ~~4.TIME_BASE：~~
 ~~时基应用不明显，不再说明；~~ 
@@ -145,16 +145,16 @@
         显示内容实现在文件[SeparateDis.C][显示文件位置]中查看；
 
 ###### 部分代码段：
->/ ********************************
->// 按键响应
->/ ******************************** */
->void KeyResponse()
->{
->    checkPressKey();    //按键按下检测;
->    checkCombKey();     //按键组合检测，在checkPressKey()后调用；
->    checkOrdinaryKey(); //普通按键检测，在checkCombKey()后调用；
->    keyCheckOver();     //按键检测完毕响应，在checkOrdinaryKey()后调用；
->}
+>/ ********************************  
+>// 按键响应  
+>/ ******************************** */  
+>void KeyResponse()  
+>{  
+>    checkPressKey();    //按键按下检测;  
+>    checkCombKey();     //按键组合检测，在checkPressKey()后调用；  
+>    checkOrdinaryKey(); //普通按键检测，在checkCombKey()后调用；  
+>    keyCheckOver();     //按键检测完毕响应，在checkOrdinaryKey()后调用；  
+>}  
 
 #### 后续功能设想：
 ###### 0.彩蛋：

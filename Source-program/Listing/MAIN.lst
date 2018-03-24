@@ -1,4 +1,4 @@
-C51 COMPILER V9.02   MAIN                                                                  03/24/2018 11:29:25 PAGE 1   
+C51 COMPILER V9.02   MAIN                                                                  03/24/2018 15:00:42 PAGE 1   
 
 
 C51 COMPILER V9.02, COMPILATION OF MODULE MAIN
@@ -31,22 +31,24 @@ line level    source
   21   2                      KeyResponse();
   22   2              // 将AD值转换为湿度百分比：
   23   2              AD_to_Humidity();   
-  24   2              // 非自动模式下湿度过低发出警报：
-  25   2              BuzzerControl();
-  26   2              // 显示控制：
-  27   2              DisControl();
-  28   2          #ifdef DeveloperMode
-  29   2              DelayMS(200);       //消除仿真闪烁（减小清屏占空）；
-  30   2          #else
+  24   2              // 自动模式下继电器的控制：
+  25   2              AutoRelayControl();
+  26   2              // 非自动模式下湿度过低发出警报：
+  27   2              BuzzerControl();
+  28   2              // 显示控制：
+  29   2              DisControl();
+  30   2          #ifdef DeveloperMode
+  31   2              DelayMS(200);       //消除仿真闪烁（减小清屏占空）；
+  32   2          #else
                       DelayMS(10);        //增加实物亮度（减小清屏占空）；
                   #endif
-  33   2      
-  34   2              }
-  35   1      }
+  35   2      
+  36   2              }
+  37   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     27    ----
+   CODE SIZE        =     30    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

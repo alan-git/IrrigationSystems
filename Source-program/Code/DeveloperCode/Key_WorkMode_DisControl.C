@@ -25,6 +25,24 @@ extern void checkOrdinaryKey();//普通按键检测，在checkCombKey()后调用；
 extern void keyCheckOver();    //按键检测完毕响应，在checkOrdinaryKey()后调用；
 
 /* *******************************************************************************************
+// 自动模式下湿度过低自动开启Relay：
+/* ******************************************************************************************* */
+void AutoRelayControl()
+{
+    if (workMode == autoControl)
+    {
+        if (Humidity <= HumidLimit)     //当前湿度小于湿度阈值；
+        {
+            PIN_ConRelay = RELAY_ON;
+        }
+        else 
+        {
+            PIN_ConRelay = RELAY_OFF;
+        }
+    }                                   //Relay打开状态切换模式Relay自动关闭的语句在按键响应部分；  
+}
+
+/* *******************************************************************************************
 // 非自动模式下湿度过低发出警报：
 /* ******************************************************************************************* */
 void BuzzerControl()
@@ -35,7 +53,14 @@ void BuzzerControl()
         if (Humidity < HumidLimit)      //当前湿度小于湿度阈值；
         {
 //            TestCode();
-            Buzzer_On();
+            if (PIN_ConRelay == RELAY_OFF)  //水泵未开启；
+            {
+                Buzzer_On();
+            }
+            else
+            {
+                Buzzer_Off();
+            }
         }
         else 
         {
@@ -258,8 +283,15 @@ static void disCombS1_Work()
 {
     switch (workMode)
     {
-        case autoControl:   workMode = manualControl;//TestCode();
+        case autoControl:
+        {
+           workMode = manualControl;//TestCode();
+            if (PIN_ConRelay == RELAY_ON)
+            {
+                PIN_ConRelay = RELAY_OFF;
+            }
             break;
+        }
         case manualControl: workMode = autoControl; //自动手动模式下，触发disCombS1，两个模式之间相互转换；
             break;
         case adjustSec:     Sec = 0;                    //秒归零；

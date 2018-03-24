@@ -3,6 +3,7 @@
 
 #include "INCLUDES.H"
 
+extern void AutoRelayControl();
 extern void BuzzerControl();
 extern void KeyResponse();
 extern void DisControl();

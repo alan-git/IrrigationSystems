@@ -32,6 +32,7 @@ static void sysSelftest()
     PCF8591_Con_Init(CON0);
     Read_PCF8591();                 //第一组值丢弃；
 #ifndef DeveloperMode               //调试模式下不在执行，耗时较长；
+//    TestCode();
     // 检测1602显示：
     Dis_SysSelftest();
     Dis_ProgressBar(2);

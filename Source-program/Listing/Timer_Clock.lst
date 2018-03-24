@@ -1,4 +1,4 @@
-C51 COMPILER V9.02   TIMER_CLOCK                                                           03/24/2018 11:29:26 PAGE 1   
+C51 COMPILER V9.02   TIMER_CLOCK                                                           03/24/2018 15:00:43 PAGE 1   
 
 
 C51 COMPILER V9.02, COMPILATION OF MODULE TIMER_CLOCK
@@ -62,7 +62,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =     77    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
-C51 COMPILER V9.02   TIMER_CLOCK                                                           03/24/2018 11:29:26 PAGE 2   
+C51 COMPILER V9.02   TIMER_CLOCK                                                           03/24/2018 15:00:43 PAGE 2   
 
    PDATA SIZE       =   ----    ----
    DATA SIZE        =      7    ----

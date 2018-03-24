@@ -8,8 +8,8 @@ sbit PIN_ConBuzzer = P3^7;
 sbit PIN_S1 = P1^0;
 sbit PIN_S2 = P1^1;
 
-#define Relay_On();     PIN_ConRelay=0;
-#define Relay_Off();    PIN_ConRelay=1;
+#define RELAY_OFF 0
+#define RELAY_ON  1
 #define Buzzer_On();    PIN_ConBuzzer=0;
 #define Buzzer_Off();   PIN_ConBuzzer=1;
 

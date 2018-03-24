@@ -21,6 +21,8 @@ void main()
 		KeyResponse();
         // 将AD值转换为湿度百分比：
         AD_to_Humidity();   
+        // 自动模式下继电器的控制：
+        AutoRelayControl();
         // 非自动模式下湿度过低发出警报：
         BuzzerControl();
         // 显示控制：

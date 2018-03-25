@@ -71,7 +71,6 @@ void Dis_Auto_not_ManualMode(bit a_not_m)
 //    u8 i;
     LCD1602_GoTo_yx(1,0);
     LCD1602_DisString("H:");   
-    LCD1602_DisNum(Humidity/100);
     LCD1602_DisNum(Humidity);
     WriteOneData('%');   
 //    LCD1602_DisNum(Read_PCF8591()/100);
@@ -83,7 +82,7 @@ void Dis_Auto_not_ManualMode(bit a_not_m)
 //            WriteOneData(' ');   
 //        }
 //        LCD1602_DisString("Auto");
-        LCD1602_DisString("     Auto");
+        LCD1602_DisString("       Auto");
     }
     else
     {
@@ -92,7 +91,7 @@ void Dis_Auto_not_ManualMode(bit a_not_m)
 //            WriteOneData(' ');   
 //        }
 //        LCD1602_DisString("Manual");
-        LCD1602_DisString("   Manual");
+        LCD1602_DisString("     Manual");
     }
     LCD1602_GoTo_yx(2,0);
     LCD1602_DisString("Time: ");

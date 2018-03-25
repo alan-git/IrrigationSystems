@@ -15,15 +15,14 @@ sbit PIN_S2 = P1^1;
 #define Buzzer_On();    PIN_ConBuzzer=0;
 #define Buzzer_Off();   PIN_ConBuzzer=1;
 
-#define H_MAX_to_AD 255     //结合实物调节此值；
-#define H_MIN_to_AD 0
+#define MULTIPLE_DETECTION 10   //一次有效检测所需的检测次数<256；
 
-#define HUMIDLIMIT_MAX  30  //湿度调节阈值可设定最大值；
-#define DEFAULT_HUMIDLIMIT 17//湿度调节阈值设定默认值；
-#define HUMIDLIMIT_MIN  14  //湿度调节阈值可设定最小值；
+#define HUMIDLIMIT_MAX  30      //湿度调节阈值可设定最大值<100；
+#define DEFAULT_HUMIDLIMIT 20   //湿度调节阈值设定默认值<100；
+#define HUMIDLIMIT_MIN  14      //湿度调节阈值可设定最小值<100；
 
-extern u8 Humidity;         //湿度；
-extern u8 HumidLimit;       //湿度调节阈值；
+extern u8 Humidity;             //湿度；
+extern u8 HumidLimit;           //湿度调节阈值；
 
 extern void STC_ISP();
 extern void AD_to_Humidity();

@@ -27,10 +27,31 @@ void STC_ISP()
 /* ******************************************************************************************* */
 void AD_to_Humidity()
 {
-    u8 temp_ad;
-    float min_accuracy;
-    temp_ad = Read_PCF8591();
-        Humidity = temp_ad;
+    auto u8 temp_ad[MULTIPLE_DETECTION];     //临时值寄存；
+    auto u16 temp_ad_sum = 0;                //所有临时值的和；
+    auto u8 i;                               //计次；
+    for (i=0; i<MULTIPLE_DETECTION; i++)
+    {
+        temp_ad[i] = Read_PCF8591();
+    }
+    for (i=0; i<MULTIPLE_DETECTION; i++)
+    {
+        temp_ad_sum += temp_ad[i];
+    }
+    temp_ad[0] = temp_ad_sum / MULTIPLE_DETECTION;      //目前temp_ad[0]存储的是多次采样的均值；
+    if (temp_ad[0] >= 253)                  //特殊样本值单独列举；
+    {
+        Humidity = 0;
+    }
+    else if (temp_ad[0] <= 2)               //特殊样本值单独列举；
+    {
+        Humidity = 99;
+    }
+    else
+    {
+        Humidity = (255 - temp_ad[0]) / 3;
+    }
+
 //    if(temp_ad >= H_MAX_to_AD)
 //    {
 //        Humidity = 0;

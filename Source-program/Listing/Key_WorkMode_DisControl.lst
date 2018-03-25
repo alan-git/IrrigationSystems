@@ -1,4 +1,4 @@
-C51 COMPILER V9.02   KEY_WORKMODE_DISCONTROL                                               03/25/2018 21:11:18 PAGE 1   
+C51 COMPILER V9.02   KEY_WORKMODE_DISCONTROL                                               03/25/2018 22:00:49 PAGE 1   
 
 
 C51 COMPILER V9.02, COMPILATION OF MODULE KEY_WORKMODE_DISCONTROL
@@ -62,7 +62,7 @@ line level    source
   51   1          {
   52   2      //        TestCode();
   53   2              if (Humidity < HumidLimit)      //µ±Ç°Êª¶ÈÐ¡ÓÚÊª¶ÈãÐÖµ£»
-C51 COMPILER V9.02   KEY_WORKMODE_DISCONTROL                                               03/25/2018 21:11:18 PAGE 2   
+C51 COMPILER V9.02   KEY_WORKMODE_DISCONTROL                                               03/25/2018 22:00:49 PAGE 2   
 
   54   2              {
   55   3      //            TestCode();
@@ -126,7 +126,7 @@ line level    source
  113   1      }
  114          
  115          /* *******************************************************************************************
-C51 COMPILER V9.02   KEY_WORKMODE_DISCONTROL                                               03/25/2018 21:11:18 PAGE 3   
+C51 COMPILER V9.02   KEY_WORKMODE_DISCONTROL                                               03/25/2018 22:00:49 PAGE 3   
 
  116          // °´¼ü°´ÏÂ¼ì²â
  117          /* ******************************************************************************************* */
@@ -190,7 +190,7 @@ line level    source
  175   1          if (PIN_S1 && combHappened == combS1 && sS1)    //S1Ì§Æð£¬ÓÐ¹ýÒÔS1ÎªÖ÷¼üµÄ×éºÏ¼ü²Ù×÷£¬sS1Î´±»¸´Î»£»
  176   1          {
  177   2              combHappened = noKey;                       //½ö¸´Î»£¬ÎÞÆäËû²Ù×÷£»
-C51 COMPILER V9.02   KEY_WORKMODE_DISCONTROL                                               03/25/2018 21:11:18 PAGE 4   
+C51 COMPILER V9.02   KEY_WORKMODE_DISCONTROL                                               03/25/2018 22:00:49 PAGE 4   
 
  178   2              sS1 = 0;     
  179   2          }
@@ -254,7 +254,7 @@ line level    source
  237          /* ******************************************************************************************* */
  238          static void combS1_Work()
  239          {
-C51 COMPILER V9.02   KEY_WORKMODE_DISCONTROL                                               03/25/2018 21:11:18 PAGE 5   
+C51 COMPILER V9.02   KEY_WORKMODE_DISCONTROL                                               03/25/2018 22:00:49 PAGE 5   
 
  240   1          if (sS2 && PIN_S2)  //S2°´ÏÂ¹ý£¬²¢ÇÒÄ¿Ç°´¦ÓÚÌ§Æð×´Ì¬£»
  241   1          {
@@ -318,7 +318,7 @@ line level    source
  299   4                      PIN_ConRelay = RELAY_OFF;
  300   4                  }
  301   3                  break;
-C51 COMPILER V9.02   KEY_WORKMODE_DISCONTROL                                               03/25/2018 21:11:18 PAGE 6   
+C51 COMPILER V9.02   KEY_WORKMODE_DISCONTROL                                               03/25/2018 22:00:49 PAGE 6   
 
  302   3              }
  303   2              case manualControl: workMode = autoControl; //×Ô¶¯ÊÖ¶¯Ä£Ê½ÏÂ£¬´¥·¢disCombS1£¬Á½¸öÄ£Ê½Ö®¼äÏà»¥×ª»»£
@@ -382,7 +382,7 @@ line level    source
  360   3                      Hour --;
  361   3                  else
  362   3                      Hour = 23;
-C51 COMPILER V9.02   KEY_WORKMODE_DISCONTROL                                               03/25/2018 21:11:18 PAGE 7   
+C51 COMPILER V9.02   KEY_WORKMODE_DISCONTROL                                               03/25/2018 22:00:49 PAGE 7   
 
  363   3                  break;
  364   3              }

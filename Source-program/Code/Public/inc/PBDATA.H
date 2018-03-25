@@ -16,10 +16,10 @@
 /* 6.根据需求选择是否屏蔽数码管字形，位选数组;
 /* N.OVER；
 /* ******************************************************************************************* */
-#define DeveloperMode
+//#define DeveloperMode
 
-#define PARAMETER_US	1//6		//软件延时时长；
-#define PARAMETER_MS	125//680	//软件延时时长；
+#define PARAMETER_US	2//6		//软件延时时长；
+#define PARAMETER_MS	130//680	//软件延时时长；
 
 #define SysLED			P12				//工作状态提示灯；
 #define SysLED_On(); 	SysLED=0;

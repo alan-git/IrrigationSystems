@@ -29,26 +29,26 @@ static void sysSelftest()
     // 初始化LCD1602：
 	LCD1602_Init(); 
 	// 设置PCF8591检测亮度：
-    PCF8591_Con_Init(CON0);
+    PCF8591_Con_Init(CON1);
     Read_PCF8591();                 //第一组值丢弃；
 #ifndef DeveloperMode               //调试模式下不再执行，耗时较长；
 //    TestCode();
     // 检测1602显示：
     Dis_SysSelftest();
     Dis_ProgressBar(2);
-    // 系统状态提示灯常亮0.6S：
+    // 系统状态提示灯常亮0.8S：
     SysLED_On();
-    DelayMS(600);
+    DelayMS(800);
     SysLED_Off();
     Dis_ProgressBar(4);
-    // 继电器打开0.6S：
+    // 继电器打开0.5S：
     Relay_On();
-    DelayMS(600);
+    DelayMS(500);
     Relay_Off();
     Dis_ProgressBar(4);
-    // 蜂鸣器打开0.6S：
+    // 蜂鸣器打开0.3S：
     Buzzer_On();
-    DelayMS(600);
+    DelayMS(300);
     Buzzer_Off();
     Dis_ProgressBar(4);
 #endif
@@ -63,6 +63,7 @@ static void sysSelftest()
     {
         Dis_Its_Daytime_Not_Night(temp_ad, TRUE);
     }
+    DelayMS(1500);
 }
 /* *******************************************************************************************
 // 系统初始化
@@ -81,11 +82,12 @@ static void sysInit()
 	PCF8591_Con_Init(CON3);
     Read_PCF8591();                         //第一组值丢弃；
     Dis_ProgressBar(4);
-    DelayMS(200);                           //阻塞感，让人有“正在加载”的感觉；
+    DelayMS(450);                           //阻塞感，让人有“正在加载”的感觉；
     // 时基定时器初始化并开启中断总开关：
     InitInterrupt();
     Dis_ProgressBar(4);
     initOver();
+    LCD1602_Clear();                        //清除显示信息；
 }
 
 /* *******************************************************************************************

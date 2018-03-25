@@ -94,6 +94,11 @@ void DisControl()
         default:
             break;
     }
+//    #ifdef DeveloperMode
+//        DelayMS(200);       //消除仿真闪烁（减小清屏占空）；
+//    #else
+//        DelayMS(50);        //消除实物闪烁（减小清屏占空）；
+//    #endif
 }
 
 /* *******************************************************************************************
@@ -235,6 +240,7 @@ static void combS1_Work()
     if (sS2 && PIN_S2)  //S2按下过，并且目前处于抬起状态；
     {
         sS2 = 0;//修改后的复位位置；
+        LCD1602_Clear();//仅在模式转换时清屏；
         TestCode();  
         switch (workMode)
         {
@@ -262,6 +268,7 @@ static void combS2_Work()
     if (sS1 && PIN_S1)  //S1按下过，并且目前处于抬起状态；
     {
         sS1 = 0;//修改后的复位位置；
+         LCD1602_Clear(); //仅在模式转换时清屏；
         switch (workMode)
         {
             case autoControl:                               //自动模式下，组合键无效；
@@ -285,7 +292,8 @@ static void disCombS1_Work()
     {
         case autoControl:
         {
-           workMode = manualControl;//TestCode();
+            workMode = manualControl;  //TestCode();
+            LCD1602_Clear();                            //切换模式时清屏；
             if (PIN_ConRelay == RELAY_ON)
             {
                 PIN_ConRelay = RELAY_OFF;
@@ -293,6 +301,7 @@ static void disCombS1_Work()
             break;
         }
         case manualControl: workMode = autoControl; //自动手动模式下，触发disCombS1，两个模式之间相互转换；
+                            LCD1602_Clear();            //切换模式时清屏；
             break;
         case adjustSec:     Sec = 0;                    //秒归零；
             break;
@@ -331,7 +340,7 @@ static void disCombS2_Work()
 {
     switch (workMode)
     {
-        case autoControl:                                //手动模式下，无效；
+        case autoControl:                               //手动模式下，无效；
             break;
         case manualControl: PIN_ConRelay = !PIN_ConRelay;//自动模式下，更改继电器状态；
             break;

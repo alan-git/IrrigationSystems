@@ -8,12 +8,14 @@ sbit PIN_ConBuzzer = P3^7;
 sbit PIN_S1 = P1^0;
 sbit PIN_S2 = P1^1;
 
-#define RELAY_OFF 0
-#define RELAY_ON  1
+#define RELAY_OFF 1
+#define RELAY_ON  0
+#define Relay_On();    PIN_ConRelay=RELAY_ON;
+#define Relay_Off();   PIN_ConRelay=RELAY_OFF;
 #define Buzzer_On();    PIN_ConBuzzer=0;
 #define Buzzer_Off();   PIN_ConBuzzer=1;
 
-#define H_MAX_to_AD 127     //结合实物调节此值；
+#define H_MAX_to_AD 255     //结合实物调节此值；
 #define H_MIN_to_AD 0
 
 #define HUMIDLIMIT_MAX  30  //湿度调节阈值可设定最大值；

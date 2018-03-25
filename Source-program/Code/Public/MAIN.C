@@ -27,11 +27,5 @@ void main()
         BuzzerControl();
         // 显示控制：
         DisControl();
-    #ifdef DeveloperMode
-        DelayMS(200);       //消除仿真闪烁（减小清屏占空）；
-    #else
-        DelayMS(10);        //增加实物亮度（减小清屏占空）；
-    #endif
-
 	}
 }

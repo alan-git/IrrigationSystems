@@ -26,7 +26,7 @@ void Dis_Its_Daytime_Not_Night(u8 temp_ad, bit sw)
     {
         LCD1602_DisString("It's Night,");  
     }
-#ifdef DeveloperMode
+#ifndef DeveloperMode
     LCD1602_GoTo_yx(2,0);
     LCD1602_DisNum(temp_ad/100); 
     LCD1602_DisNum(temp_ad); 
@@ -69,10 +69,13 @@ void Dis_init_()
 void Dis_Auto_not_ManualMode(bit a_not_m)
 {
 //    u8 i;
-    LCD1602_Clear();
+    LCD1602_GoTo_yx(1,0);
     LCD1602_DisString("H:");   
+    LCD1602_DisNum(Humidity/100);
     LCD1602_DisNum(Humidity);
     WriteOneData('%');   
+//    LCD1602_DisNum(Read_PCF8591()/100);
+//    LCD1602_DisNum(Read_PCF8591());
     if (a_not_m == TRUE)
     {
 //        for (i=0; i<(16-5-sizeof("Auto")); i++)
@@ -80,7 +83,7 @@ void Dis_Auto_not_ManualMode(bit a_not_m)
 //            WriteOneData(' ');   
 //        }
 //        LCD1602_DisString("Auto");
-        LCD1602_DisString("       Auto");
+        LCD1602_DisString("     Auto");
     }
     else
     {
@@ -89,7 +92,7 @@ void Dis_Auto_not_ManualMode(bit a_not_m)
 //            WriteOneData(' ');   
 //        }
 //        LCD1602_DisString("Manual");
-        LCD1602_DisString("     Manual");
+        LCD1602_DisString("   Manual");
     }
     LCD1602_GoTo_yx(2,0);
     LCD1602_DisString("Time: ");
@@ -106,7 +109,7 @@ void Dis_Auto_not_ManualMode(bit a_not_m)
 /* ******************************************************************************************* */
 void AdjustmentDataDis(u8 choose, num_data)
 {
-    LCD1602_Clear();
+    LCD1602_GoTo_yx(1,0);
     LCD1602_DisString("Set:");
     switch (choose)
     {

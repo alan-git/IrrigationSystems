@@ -30,17 +30,18 @@ void AD_to_Humidity()
     u8 temp_ad;
     float min_accuracy;
     temp_ad = Read_PCF8591();
-    if(temp_ad >= H_MAX_to_AD)
-    {
-        Humidity = 99;
-    }
-    else if (temp_ad <= H_MIN_to_AD)
-    {
-        Humidity = 0;
-    }
-    else
-    {
-        min_accuracy = (H_MAX_to_AD - H_MIN_to_AD) / 100;
-        Humidity = (H_MAX_to_AD - temp_ad) / min_accuracy;      //根据实际情况选择计算公式；
-    }
+        Humidity = temp_ad;
+//    if(temp_ad >= H_MAX_to_AD)
+//    {
+//        Humidity = 0;
+//    }
+//    else if (temp_ad <= H_MIN_to_AD)
+//    {
+//        Humidity = 99;
+//    }
+//    else
+//    {
+//        min_accuracy = (H_MAX_to_AD - H_MIN_to_AD) / 100;
+//        Humidity = (temp_ad - H_MIN_to_AD) / min_accuracy;      //根据实际情况选择计算公式；
+//    }
 }

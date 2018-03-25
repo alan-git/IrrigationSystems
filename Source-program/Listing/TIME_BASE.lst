@@ -1,4 +1,4 @@
-C51 COMPILER V9.02   TIME_BASE                                                             03/24/2018 15:00:42 PAGE 1   
+C51 COMPILER V9.02   TIME_BASE                                                             03/25/2018 21:11:17 PAGE 1   
 
 
 C51 COMPILER V9.02, COMPILATION OF MODULE TIME_BASE
@@ -62,7 +62,7 @@ line level    source
   52   1              TH0 = 0xEC;
   53   1              if (++ cp > OVERFLOW_TIMES)
   54   1              {
-C51 COMPILER V9.02   TIME_BASE                                                             03/24/2018 15:00:42 PAGE 2   
+C51 COMPILER V9.02   TIME_BASE                                                             03/25/2018 21:11:17 PAGE 2   
 
   55   2                      cp = 0;
   56   2                      // 以OVERFLOW_TIMES为时基：

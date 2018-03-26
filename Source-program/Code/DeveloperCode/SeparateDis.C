@@ -26,14 +26,14 @@ void Dis_Its_Daytime_Not_Night(u8 temp_ad, bit sw)
     {
         LCD1602_DisString("It's Night,");  
     }
-#ifndef DeveloperMode
+//#ifdef DeveloperMode
     LCD1602_GoTo_yx(2,0);
     LCD1602_DisNum(temp_ad/100); 
     LCD1602_DisNum(temp_ad); 
-#else
-    temp_ad ++;       //防止出现定义了参数却未使用的警告；
-    temp_ad --;
-#endif
+//#else
+//    temp_ad ++;       //防止出现定义了参数却未使用的警告；
+//    temp_ad --;
+//#endif
     LCD1602_GoTo_yx(2,9);
     LCD1602_DisString("Right?"); 
 }

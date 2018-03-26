@@ -1,4 +1,4 @@
-C51 COMPILER V9.02   SEPARATEDIS                                                           03/25/2018 22:00:49 PAGE 1   
+C51 COMPILER V9.02   SEPARATEDIS                                                           03/26/2018 09:14:14 PAGE 1   
 
 
 C51 COMPILER V9.02, COMPILATION OF MODULE SEPARATEDIS
@@ -37,14 +37,14 @@ line level    source
   26   1          {
   27   2              LCD1602_DisString("It's Night,");  
   28   2          }
-  29   1      #ifndef DeveloperMode
+  29   1      //#ifdef DeveloperMode
   30   1          LCD1602_GoTo_yx(2,0);
   31   1          LCD1602_DisNum(temp_ad/100); 
   32   1          LCD1602_DisNum(temp_ad); 
-  33   1      #else
-                  temp_ad ++;       //防止出现定义了参数却未使用的警告；
-                  temp_ad --;
-              #endif
+  33   1      //#else
+  34   1      //    temp_ad ++;       //防止出现定义了参数却未使用的警告；
+  35   1      //    temp_ad --;
+  36   1      //#endif
   37   1          LCD1602_GoTo_yx(2,9);
   38   1          LCD1602_DisString("Right?"); 
   39   1      }
@@ -62,7 +62,7 @@ line level    source
   51   2              DelayMS(80);   
   52   2          }
   53   1      }
-C51 COMPILER V9.02   SEPARATEDIS                                                           03/25/2018 22:00:49 PAGE 2   
+C51 COMPILER V9.02   SEPARATEDIS                                                           03/26/2018 09:14:14 PAGE 2   
 
   54          
   55          /* *******************************************************************************************
@@ -126,7 +126,7 @@ line level    source
  113   1          switch (choose)
  114   1          {
  115   2              case HOUR:LCD1602_DisString("Hour = ");
-C51 COMPILER V9.02   SEPARATEDIS                                                           03/25/2018 22:00:49 PAGE 3   
+C51 COMPILER V9.02   SEPARATEDIS                                                           03/26/2018 09:14:14 PAGE 3   
 
  116   2                  break;
  117   2              case MIN: LCD1602_DisString("Min = ");

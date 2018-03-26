@@ -3,7 +3,7 @@
 
 #include "INCLUDES.H"
 
-#define LIGHT_INTENSITY_THRESHOLD 120    //测试数据，手遮数据150以上，光照100以下；
+#define LIGHT_INTENSITY_THRESHOLD 100    //测试数据，手遮数据100以上，光照90以下；
 
 extern void SysSelftest_And_SysInit();
 

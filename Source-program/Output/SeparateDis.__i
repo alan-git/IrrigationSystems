@@ -1,0 +1,1 @@
+"..\Code\DeveloperCode\SeparateDis.C" BROWSE INCDIR(..\Code\DeveloperCode\inc;..\Code\DirverCode\inc;..\Code\Public\inc) DEBUG OBJECTEXTEND PRINT(..\Listing\SeparateDis.lst) OBJECT(..\Output\SeparateDis.obj)
